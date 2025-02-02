@@ -1,0 +1,119 @@
+package com.rustamlee.focuslist.domain.entities;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
+@Entity
+@Table(name = "task_list")
+public class TaskList {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
+
+    @Column(name = "title", nullable = false)
+    private String title;
+
+    @Column(name = "description")
+    private String description;
+
+    @OneToMany(mappedBy = "taskLists", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
+    private List<Task> tasks;
+
+    @Column(name = "created", nullable = false)
+    private LocalDate created;
+
+    @Column(name = "updated", nullable = false)
+    private LocalDate updated;
+
+    // constructors
+
+    public TaskList() {
+    }
+
+    public TaskList(UUID id, String title, String description, List<Task> tasks, LocalDate created, LocalDate updated) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.tasks = tasks;
+        this.created = created;
+        this.updated = updated;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public LocalDate getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDate created) {
+        this.created = created;
+    }
+
+    public LocalDate getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDate updated) {
+        this.updated = updated;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        TaskList taskList = (TaskList) object;
+        return Objects.equals(id, taskList.id) && Objects.equals(title, taskList.title) && Objects.equals(description, taskList.description) && Objects.equals(tasks, taskList.tasks) && Objects.equals(created, taskList.created) && Objects.equals(updated, taskList.updated);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, tasks, created, updated);
+    }
+
+    @Override
+    public String toString() {
+        return "TaskList{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", tasks=" + tasks +
+                ", created=" + created +
+                ", updated=" + updated +
+                '}';
+    }
+}

@@ -1,0 +1,18 @@
+services:
+ # Define the database service using the PostgreSQL Docker image
+  db:
+
+# Use the official PostgreSQL Docker image (latest version)
+    image: postgres:latest
+
+# Expose port 5432 from the container to the host machine
+# allowing access to the PostgreSQL database
+    ports:
+    - "5432:5432"
+
+# Ensure the container restarts automatically if it crashes or is stopped
+    restart: always
+
+# Set environment variables for PostgreSQL
+    environment:
+      POSTGRES_PASSWORD: changemeinprod!
