@@ -1,4 +1,4 @@
-package com.rustamlee.focuslist.mappers.impl;
+package com.rustamlee.focuslist.services.impl;
 
 import com.rustamlee.focuslist.domain.dto.TaskDto;
 import com.rustamlee.focuslist.domain.entities.Task;

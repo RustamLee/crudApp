@@ -3,6 +3,7 @@ package com.rustamlee.focuslist.domain.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -22,21 +23,21 @@ public class TaskList {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "taskLists", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "taskList", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
     private List<Task> tasks;
 
     @Column(name = "created", nullable = false)
-    private LocalDate created;
+    private LocalDateTime created;
 
     @Column(name = "updated", nullable = false)
-    private LocalDate updated;
+    private LocalDateTime updated;
 
     // constructors
 
     public TaskList() {
     }
 
-    public TaskList(UUID id, String title, String description, List<Task> tasks, LocalDate created, LocalDate updated) {
+    public TaskList(UUID id, String title, String description, List<Task> tasks, LocalDateTime created, LocalDateTime updated) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -77,19 +78,19 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public LocalDate getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDate created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
-    public LocalDate getUpdated() {
+    public LocalDateTime getUpdated() {
         return updated;
     }
 
-    public void setUpdated(LocalDate updated) {
+    public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
     }
 
