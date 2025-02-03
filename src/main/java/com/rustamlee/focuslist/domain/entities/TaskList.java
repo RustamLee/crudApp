@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+ // Entity representing a task list in the application
+// Maps to the "task_list" table in the database.
+
+
 @Entity
 @Table(name = "task_list")
 public class TaskList {
@@ -23,6 +27,10 @@ public class TaskList {
     @Column(name = "description")
     private String description;
 
+    /*
+      List of tasks associated with the task list.
+      This relationship is mapped by the "taskList" field in the Task entity.
+     */
     @OneToMany(mappedBy = "taskList", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
     private List<Task> tasks;
 
@@ -33,7 +41,6 @@ public class TaskList {
     private LocalDateTime updated;
 
     // constructors
-
     public TaskList() {
     }
 

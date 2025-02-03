@@ -8,6 +8,15 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+/**
+ * Global exception handler to catch and handle exceptions across the entire application.
+ * It centralizes exception management and customizes error responses.
+ * When an exception occurs in the application's controllers, Spring
+ * looks for a method with a matching @ExceptionHandler annotation
+ * inside the class marked with @ControllerAdvice and passes the
+ * exception there for handling.
+ */
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler({IllegalArgumentException.class})
@@ -19,6 +28,5 @@ public class GlobalExceptionHandler {
                 request.getDescription(false)
         );
      return new ResponseEntity<>(errorResponce,HttpStatus.BAD_REQUEST);
-
     }
 }

@@ -11,17 +11,22 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+// This controller manages task list operations.
+// It provides endpoints to create, read, update, and delete task lists.
+
 @RestController
 @RequestMapping(path = "/task-lists")
 public class TaskListController {
     private final TaskListService taskListService;
     private final TaskListMapper taskListMapper;
 
+    // Constructor injection for TaskListService and TaskListMapper dependencies
     public TaskListController(TaskListService taskListService, TaskListMapper taskListMapper) {
         this.taskListService = taskListService;
         this.taskListMapper = taskListMapper;
     }
 
+    // Retrieves all task lists and maps them to DTOs.
     @GetMapping
     public List<TaskListDto> listTaskLists() {
         return taskListService.listTasklists()
@@ -30,6 +35,7 @@ public class TaskListController {
                 .toList();
     }
 
+    // Creates a new task list and returns it as a DTO.
     @PostMapping
     public TaskListDto createTaskList(@RequestBody TaskListDto taskListDto) {
         TaskList createdTaskList = taskListService.createTaskList(
@@ -38,11 +44,13 @@ public class TaskListController {
         return taskListMapper.toDto(createdTaskList);
     }
 
+    // Retrieves a task list by its ID and maps it to a DTO if found.
     @GetMapping(path = "/{task_list_id}")
     public Optional<TaskListDto> getTaskList(@PathVariable("task_list_id") UUID taskListId) {
         return taskListService.getTaskList(taskListId).map(taskListMapper::toDto);
     }
 
+    // Updates an existing task list with new data and returns the updated task list as a DTO.
     @PutMapping(path = "/{task_list_id}")
     public TaskListDto updateTaskList(
             @PathVariable("task_list_id") UUID taskListId,
@@ -53,6 +61,7 @@ public class TaskListController {
         return taskListMapper.toDto(updatedTaskList);
     }
 
+    // Deletes a task list by its ID.
     @DeleteMapping(path = "/{task_list_id}")
     public void deleteTaskList(@PathVariable("task_list_id")UUID taskListId){
         taskListService.deleteTaskList(taskListId);

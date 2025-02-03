@@ -7,7 +7,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
+ // Repository interface for accessing TaskList entities in the database.
+// Extending JpaRepository provides CRUD operations for TaskList
+
 @Repository
 public interface TaskListRepository extends JpaRepository<TaskList, UUID> {
 
 }
+
+// No need to write methods for basic CRUD operations (save, find, delete, etc.).
+// JpaRepository provides all these out-of-the-box.

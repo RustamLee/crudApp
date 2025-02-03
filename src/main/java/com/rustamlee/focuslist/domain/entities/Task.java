@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+
+ // Entity representing a task in the application.
+ // Maps to the "tasks" table in the database.
+
+
 @Entity
 @Table(name="tasks")
 public class Task {
@@ -31,6 +36,10 @@ public class Task {
     @Column(name = "priority", nullable = false)
     private TaskPriority priority;
 
+    /*
+     The task list this task belongs to (many tasks can belong to one task list).
+     The association is lazily fetched to optimize performance.
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_list_id")
     private TaskList taskList;
@@ -42,7 +51,6 @@ public class Task {
     private LocalDateTime updated;
 
     // constructors
-
     public Task() {
     }
 

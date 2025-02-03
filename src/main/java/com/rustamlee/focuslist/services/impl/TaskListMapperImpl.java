@@ -16,11 +16,13 @@ public class TaskListMapperImpl implements TaskListMapper {
 
     private final TaskMapper taskMapper;
 
+    // Constructor injection of TaskMapper dependency
     public TaskListMapperImpl(TaskMapper taskMapper) {
         this.taskMapper = taskMapper;
     }
 
 
+    // Method for converting TaskListDto to TaskList (Entity)
     @Override
     public TaskList fromDto(TaskListDto taskListDto) {
         return new TaskList(
@@ -37,6 +39,7 @@ public class TaskListMapperImpl implements TaskListMapper {
         );
     }
 
+    // Method for converting TaskList (Entity) to TaskListDto
     @Override
     public TaskListDto toDto(TaskList taskList) {
         return new TaskListDto(
@@ -52,6 +55,7 @@ public class TaskListMapperImpl implements TaskListMapper {
         );
     }
 
+    // Method for calculating the progress of the task list
     private Double calculateTaskListProgress(List<Task> tasks) {
         if (null == tasks) {
             return null;
